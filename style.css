@@ -301,9 +301,9 @@ ul {
     align-items: center;
     text-align: center;
     overflow: hidden;
-    
+
     /* Gunakan yang 80px saja agar konten turun di bawah navbar fixed */
-    margin-top: 80px; 
+    margin-top: 80px;
 }
 
 .hero-overlay {
@@ -439,35 +439,27 @@ ul {
 
 /* SERVICES */
 .services {
-    position: relative; /* Wajib ada */
-    z-index: 5;        /* Di bawah navbar (1000) tapi di atas background */
+    position: relative;
+    /* Wajib ada */
+    z-index: 5;
+    /* Di bawah navbar (1000) tapi di atas background */
 }
+
 .bg-dark {
 
     background: linear-gradient(180deg, #020c1b 0%, #0a192f 100%);
 
 }
 
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-
-
 .service-item {
-    background: rgba(17, 34, 64, 0.4);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(206, 129, 15, 0.2);
+    background: rgba(10, 25, 47, 0.5);
+    border: 1px solid rgba(191, 149, 63, 0.3);
     padding: 30px;
-    border-radius: 8px;
-    text-align: left;
-    transition: all 0.3s ease;
+    text-align: center;
+    height: auto !important;
+    /* Biar kotak memanjang sesuai teks */
+    transition: 0.3s;
 }
-
-
 
 .service-item:hover {
 
@@ -2508,17 +2500,81 @@ body {
 
 
 
+    /* --- SERVICES GRID (Satu Kode untuk Semua Layar) --- */
     .services-grid {
-
-        display: grid;
-
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
-        gap: 20px;
-
+        display: grid !important;
+        /* Default Laptop: 3 Kolom Sejajar */
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 25px;
+        padding: 20px 0;
+        width: 100%;
     }
 
+    /* --- TABLET (Lebar layar di bawah 992px) --- */
+    @media (max-width: 992px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            /* Jadi 2 kolom */
+        }
+    }
 
+    /* --- HANDPHONE (Lebar layar di bawah 768px) --- */
+    @media (max-width: 768px) {
+        .services-grid {
+            grid-template-columns: 1fr !important;
+            /* Paksa 1 kolom penuh agar tidak terpotong */
+            gap: 15px;
+        }
+
+        .service-item {
+            width: 100% !important;
+            /* Memastikan kotak memenuhi lebar layar HP */
+            margin: 0 auto;
+        }
+    }
+
+    /* --- OUR CREW GRID (Sejajar dengan Services) --- */
+    .crew-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        /* Laptop 3 kolom */
+        gap: 30px;
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    /* Style Nama Crew (Font Mewah & Tidak Alay) */
+    .crew-card h3 {
+        font-family: var(--font-heading) !important;
+        letter-spacing: 5px !important;
+        /* Jarak huruf lebar membuat kesan mahal */
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        color: var(--white);
+        margin-top: 15px;
+    }
+
+    .crew-card p {
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        color: var(--gold);
+        opacity: 0.9;
+    }
+
+    /* --- RESPONSIVE CREW (Tablet & HP) --- */
+    @media (max-width: 992px) {
+        .crew-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .crew-grid {
+            grid-template-columns: 1fr !important;
+            padding: 0 15px;
+        }
+    }
 
     .service-item {
 
@@ -3374,50 +3430,157 @@ body {
     color: var(--gold);
 }
 
-/* --- FIX KLIK & UKURAN MOBILE --- */
-
-.service-card {
-    position: relative;
-    z-index: 10;       /* Agar elemen di dalamnya bisa diklik */
-    pointer-events: auto !important; /* Memastikan jari bisa menyentuh tombol */
+/* --- 1. PEMBERSIHAN AREA (ANTI-NABRAK) --- */
+.crew-section,
+#services {
+    padding: 100px 0 !important;
+    /* Jarak lega antar section */
+    display: block !important;
+    overflow: visible !important;
 }
 
-/* 2. Mengunci ukuran layar HP agar tidak meluber */
+/* --- 2. KUNCI KONTAINER TENGAH --- */
+.container {
+    max-width: 1140px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    width: 100% !important;
+}
+
+/* --- 3. PENGATURAN GRID LAPTOP (3 KOLOM SEJAJAR) --- */
+@media (min-width: 993px) {
+
+    .services-grid,
+    .crew-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 50px 30px !important;
+        /* Jarak vertikal 50px, horizontal 30px */
+        margin-top: 60px !important;
+    }
+}
+
+/* --- 4. STYLE KARTU CREW (HD & MEWAH) --- */
+.crew-card {
+    background: rgba(17, 34, 64, 0.5) !important;
+    border: 1px solid rgba(191, 149, 63, 0.2) !important;
+    padding: 40px 20px !important;
+    border-radius: 20px !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.crew-card:hover {
+    transform: translateY(-10px) !important;
+    border-color: var(--gold) !important;
+    background: rgba(17, 34, 64, 0.8) !important;
+}
+
+/* Pengaturan Foto agar Tidak Nabrak Teks */
+.crew-img {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    margin-bottom: 25px !important;
+    /* Jarak ke nama */
+    border: 3px solid var(--gold) !important;
+}
+
+/* Font Nama (Elegant & Spacing Mewah) */
+.crew-card h3 {
+    font-family: var(--font-heading) !important;
+    letter-spacing: 4px !important;
+    text-transform: uppercase !important;
+    font-size: 1.2rem !important;
+    color: var(--white) !important;
+    margin-bottom: 10px !important;
+}
+
+.crew-card p {
+    font-family: var(--font-body) !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 2px !important;
+    color: var(--gold) !important;
+    margin: 0 !important;
+}
+
+/* --- 5. RESPONSIVE TABLET & HP --- */
+@media (max-width: 992px) {
+
+    .services-grid,
+    .crew-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        /* Tablet 2 Kolom */
+    }
+}
+
 @media (max-width: 768px) {
 
-    html,
-    body {
-        width: 100vw;
-        max-width: 100%;
-        overflow-x: hidden !important;
-        position: relative;
+    .services-grid,
+    .crew-grid {
+        grid-template-columns: 1fr !important;
+        /* HP 1 Kolom */
+        gap: 30px !important;
     }
 
-    /* Memastikan kontainer tidak lebih lebar dari layar */
-    .container,
-    .section,
-    .row {
+    .crew-card {
         width: 100% !important;
-        max-width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-        box-sizing: border-box !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
     }
 
-    /* Jika baris ke-3 adalah card/layanan, kecilkan ukurannya */
-    .service-card {
-        width: 100% !important;
-        margin-bottom: 20px !important;
+    /* --- OPTIMASI FOTO CREW AGAR TERLIHAT HD & MEWAH --- */
+
+    .crew-img {
+        width: 160px !important;
+        height: 160px !important;
+        border-radius: 50% !important;
+        object-fit: cover !important;
+        margin-bottom: 25px !important;
+
+        /* 1. MENGUNCI KETAJAMAN (HD MODE) */
+        image-rendering: -webkit-optimize-contrast !important;
+        /* Rahasia foto tajam di Chrome/Safari */
+        image-rendering: crisp-edges !important;
+
+        /* 2. PENYEMPURNAAN WARNA */
+        filter: brightness(1.05) contrast(1.1) saturate(1.1);
+        /* Membuat warna foto lebih 'keluar' */
+
+        /* 3. BINGKAI EMAS MEWAH */
+        border: 3px solid var(--gold) !important;
+        outline: 5px solid rgba(191, 149, 63, 0.1);
+        /* Outline halus di luar border */
+
+        /* 4. EFEK CAHAYA (GLOW) */
+        box-shadow: 0 0 20px rgba(191, 149, 63, 0.4),
+            inset 0 0 15px rgba(0, 0, 0, 0.2);
+
+        transition: all 0.5s ease !important;
     }
-    /* Memastikan gambar di dalam card tidak meluber */
-    @media (max-width: 768px) {
-   /* Kode di dalam sini HANYA aktif jika lebar layar 
-      pengunjung kurang dari atau sama dengan 768 pixel (ukuran HP/Tablet) */
-      
-   .hero {
-       margin-top: 60px; 
-   }
-}
+
+    /* Efek saat Kursor Menempel */
+    .crew-card:hover .crew-img {
+        transform: scale(1.05) rotate(2deg);
+        /* Sedikit membesar dan miring agar dinamis */
+        filter: brightness(1.1) contrast(1.15) saturate(1.2);
+        border-color: var(--gold-light) !important;
+        box-shadow: 0 0 30px rgba(191, 149, 63, 0.6);
+    }
+
+    /* --- PERBAIKAN CARD AGAR TIDAK NABRAK (HD LAYOUT) --- */
+    .crew-card {
+        background: linear-gradient(145deg, rgba(10, 25, 47, 0.8), rgba(5, 12, 26, 0.9)) !important;
+        backdrop-filter: blur(15px);
+        /* Efek kaca transparan */
+        border-radius: 25px !important;
+        padding: 45px 25px !important;
+        border: 1px solid rgba(191, 149, 63, 0.2) !important;
+        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
 }
